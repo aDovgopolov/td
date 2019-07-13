@@ -37,49 +37,50 @@ public class DataManager : MonoBehaviour
 
 	public void PreloadDataFile()
 	{
-		string nFile = @"C:/Users/Alex/AppData/LocalLow/xlow/Tetris/playerInfo.data";
+		//string nFile = @"C:/Users/Alex/AppData/LocalLow/xlow/Tetris/playerInfo.data";
 
-		if (File.Exists(nFile))
-		{
-			Debug.Log("File already exists!");
-		}
-		else
-		{
-			Debug.Log("File not exists!");
-			FileStream fs = new FileStream(nFile, FileMode.CreateNew, FileAccess.ReadWrite);
-			fs.Close();
-			Save(0); // default data
-		}
+		//if (File.Exists(nFile))
+		//{
+		//	Debug.Log("File already exists!");
+		//}
+		//else
+		//{
+		//	Debug.Log("File not exists!");
+		//	FileStream fs = new FileStream(nFile, FileMode.CreateNew, FileAccess.ReadWrite);
+		//	fs.Close();
+		//	Save(0); // default data
+		//}
 	}
 
 	public void Save(int playerCount)
 	{
-		BinaryFormatter bf = new BinaryFormatter();
-		FileStream file = File.Open(Application.persistentDataPath + "/playerInfo.data", FileMode.Open);
+		//BinaryFormatter bf = new BinaryFormatter();
+		//FileStream file = File.Open(Application.persistentDataPath + "/playerInfo.data", FileMode.Open);
 
-		PlayerData data = new PlayerData
-		{
-			points = playerCount
-		};
+		//PlayerData data = new PlayerData
+		//{
+		//	points = playerCount
+		//};
 
-		bf.Serialize(file, data);
-		file.Close();
+		//bf.Serialize(file, data);
+		//file.Close();
 	}
 
 	public void Load()
 	{
-		PreloadDataFile();
+		//PreloadDataFile();
 
-		if (File.Exists(Application.persistentDataPath + "/playerInfo.data"))
-		{
-			BinaryFormatter bf = new BinaryFormatter();
-			FileStream file = File.Open(Application.persistentDataPath + "/playerInfo.data", FileMode.OpenOrCreate);
+		//if (File.Exists(Application.persistentDataPath + "/playerInfo.data"))
+		//{
+		//	BinaryFormatter bf = new BinaryFormatter();
+		//	FileStream file = File.Open(Application.persistentDataPath + "/playerInfo.data", FileMode.OpenOrCreate);
 
-			PlayerData data = (PlayerData)bf.Deserialize(file);
-			file.Close();
+		//	PlayerData data = (PlayerData)bf.Deserialize(file);
+		//	file.Close();
 
-			points = data.points;
-		}
+		//	points = data.points;
+		//}
 		UIManager.Instance.SetTopPlayerCount(points);
+		Debug.Log($" point = {points}");
 	}
 }

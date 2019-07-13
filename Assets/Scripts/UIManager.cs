@@ -27,6 +27,7 @@ public class UIManager : MonoBehaviour
 
 	private void Awake()
 	{
+		Screen.orientation = ScreenOrientation.Landscape;
 		_instance = this;
 	}
 
@@ -56,6 +57,6 @@ public class UIManager : MonoBehaviour
 	{
 		newChild.GetComponent<Group>().RemoveGroupScriptsFromObject();
 		newChild.transform.SetParent(GameObject.FindGameObjectWithTag("NextFigure").transform);
-		newChild.transform.localPosition = new Vector3(-1518f, -610f);//(-433.5f, -192f, 0); (-269.5f, -362f);
+		newChild.transform.localPosition = new Vector3(-1017f, -50f);//(-433.5f, -192f, 0); (-269.5f, -362f);
 	}
 }

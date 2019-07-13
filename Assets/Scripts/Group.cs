@@ -14,10 +14,18 @@ public class Group : MonoBehaviour
 
 	void Start()
     {
-		if (!Grid.IsValidGridPos(this))
-		{
-			Destroy(gameObject);
-		}
+		MoveManager.Instance.SetGroup(this);
+		width = (float)Screen.width / 2.0f;
+		height = (float)Screen.height / 2.0f;
+
+		// Position used for the cube.
+		position = transform.position;//new Vector3(0.0f, 0.0f, 0.0f);
+
+		Debug.Log($"{this} =   {Grid.IsValidGridPos(this)}" );
+		//if (!Grid.IsValidGridPos(this))
+		//{
+		//	Destroy(gameObject);
+		//}
 
 		if (GetComponent<GroupTest>() != null)
 			Figure =  GetComponent<GroupTest>().GiveOwnFigure();
@@ -27,10 +35,63 @@ public class Group : MonoBehaviour
 		SplashManager = new SplashManager(this);
 
 		StartCoroutine(DestroyItselfWhenEmpty());
+
+		//startTime = Time.time;
+		//journeyLength = Vector3.Distance(startMarker.position, endMarker.position);
+		lastPos = transform.localPosition.x;
 	}
 
+	private Vector3 position;
+	private float width;
+	private float height;
+	private Vector3 pos;
+
+	// follow finger part
+	//public Transform startMarker;
+	//public Transform endMarker;
+	//public float speed = 1.0F;
+	//private float startTime;
+	//private float journeyLength;
+	private float lastPos;
+
 	void Update()
-	{
+	{	
+
+		if (Input.touchCount > 0)
+		{
+			Touch touch = Input.GetTouch(0);
+
+			if (touch.phase == TouchPhase.Moved)
+			{
+				//Vector3 touchPosition1 = Camera.main.ScreenToWorldPoint(Input.GetTouch(0).position);
+				//Debug.Log($"{transform.position.x}  =  {touchPosition1.x}");
+				////Vector3 touchPosition = Camera.main.ScreenToWorldPoint(new Vector3(touch.position.x, touch.position.y, 10));
+				////transform.position = touchPosition;
+				//if(lastPos < touchPosition1.x)
+				//{
+				//	MoveLeft();
+				//}
+				//else
+				//{
+				//	MoveRight();
+				//}
+			}
+
+			//if (Input.touchCount == 1)
+			//{
+			//	Debug.Log("Input.touchCount ==1 ");
+			//	ChangeRotation();
+			//}
+			//if (Input.touchCount == 2)
+			//{
+			//	Debug.Log("Input.touchCount ==2 ");
+			//	MoveToFloor(15);
+			//}
+		}
+
+
+
+
 		if (Input.GetKeyDown(KeyCode.UpArrow))
 		{
 			ChangeRotation();
@@ -64,6 +125,8 @@ public class Group : MonoBehaviour
 		{	
 			MoveDownAndFall();
 		}
+
+		lastPos = transform.position.x;
 	}
 
 	public void MoveToFloor(int floorLevel)
@@ -123,7 +186,7 @@ public class Group : MonoBehaviour
 		lastFall = Time.time;
 	}
 
-	private void ChangeRotation()
+	public void ChangeRotation()
 	{
 		if (!Figure.HasSecondFloor) return;
 

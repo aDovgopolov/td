@@ -11,7 +11,6 @@ public class Spawner: MonoBehaviour
 	
 	void Start()
     {
-		Debug.Log("sdfshjsdjfgsdhjfghDHJSFGHJDSGHFHJDSFHGHSDJKFGHKJDSHFGJKSDGHKJFGSDJKFBj62136712351687gvbdsad");
 		//DataManager.Instance.PreloadDataFile();
 		DataManager.Instance.Load();
 		ShowNextElement();
@@ -19,6 +18,7 @@ public class Spawner: MonoBehaviour
 		Instantiate(groups[Random.Range(0, groups.Length)],
 					transform.position,
 					Quaternion.identity);
+		Debug.Log("sdfshjsdjfgsdhjfghDHJSFGHJDSGHFHJDSFHGHSDJKFGHKJDSHFGJKSDGHKJFGSDJKFBj62136712351687gvbdsad");
 	}
 
 	private bool CheckGameOver()
